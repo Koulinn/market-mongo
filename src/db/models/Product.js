@@ -1,4 +1,5 @@
-import mongoose, { now } from "mongoose";
+import mongoose from "mongoose";
+
 
 const { Schema, model } = mongoose
 
@@ -12,14 +13,17 @@ const productSchema = new Schema({
     productReviews: [{
         comment: String,
         rate: Number,
-        userId: {type: Schema.Types.ObjectId, ref: "User", required: true},
-        createdAt: new Date(),
-        updatedAt: { type: Date, default: Date.now },
+        userId: {type: Schema.Types.ObjectId, ref: "User"}
     }]
 }, {
     timestamps: true
 })
 
+productSchema.static("destroy", async function (productID) {
+    const DbRes = await this.findByIdAndDelete(productID)
+  
+    return { DbRes }
+  })
 
-export default mode('Product', productSchema)
+export default model('Product', productSchema)
 

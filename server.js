@@ -3,6 +3,7 @@ import cors from "cors"
 import lib from "./src/lib/index.js"
 import mongoose from 'mongoose'
 import categoryRouter from './src/services/category/index.js'
+import productRouter from './src/services/products/index.js'
 
 
 const { errorHandlers, serverConfig } = lib
@@ -15,6 +16,7 @@ server.use(express.json())
 server.use(cors(serverConfig))
 
 server.use("/category", categoryRouter)
+server.use("/product", productRouter)
 
 
 

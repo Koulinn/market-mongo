@@ -8,9 +8,9 @@ router
   .get(product.getAll)
   .post(product.create)
   
-  // router
-  // .route("/category/:categoryID")
-  // .get(product.getByCategory)
+  router
+  .route("/category/:categoryID")
+  .get(product.getByCategory)
 
 router
   .route("/:productID")

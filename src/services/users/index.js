@@ -1,19 +1,19 @@
 import express from "express"
-import product from "./users-handlers.js"
+import user from "./users-handlers.js"
 
 const router = express.Router()
 
 router
   .route("/")
-  .get(product.getAll)
-  .post(product.create)
+  .get(user.getAll)
+  .post(user.create)
   
 
 router
   .route("/:userID")
-  .get(product.getSingle)
-  .put(product.update)
-  .delete(product.deleteSingle)
+  .get(user.getSingle)
+  .put(user.update)
+  .delete(user.deleteSingle)
 
 
 export default router

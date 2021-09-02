@@ -2,7 +2,7 @@ import Product from "../../db/models/Product.js"
 
 const getAll = async (req, res, next) => {
   try {
-    const Products = await Product.find({})
+    const Products = await Product.find()
     .populate('category')
     res.send(Products)
   } catch (error) {
@@ -12,10 +12,11 @@ const getAll = async (req, res, next) => {
 const getSingle = async (req, res, next) => {
   try {
     const { productID } = req.params
-    const category = await Product.findById(productID)
+    const product = await Product.findById(productID)
     .populate('category')
+    console.log(product)
 
-    res.send(category)
+    res.send(product)
   } catch (error) {
     console.log(error)
     next(error)

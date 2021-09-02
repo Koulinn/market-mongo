@@ -62,7 +62,7 @@ const deleteSingle = async (req, res, next) => {
 
 
 
-const product = {
+const user = {
   create: create,
   getAll: getAll,
   getSingle: getSingle,
@@ -70,4 +70,4 @@ const product = {
   deleteSingle: deleteSingle
 }
 
-export default product
+export default user

@@ -2,6 +2,8 @@ import express from "express"
 import cors from "cors"
 import lib from "./src/lib/index.js"
 import mongoose from 'mongoose'
+import categoryRouter from './src/services/category/index.js'
+
 
 const { errorHandlers, serverConfig } = lib
 
@@ -12,7 +14,7 @@ const { PORT } = process.env
 server.use(express.json())
 server.use(cors(serverConfig))
 
-// server.use("/cart", cartRouter)
+server.use("/category", categoryRouter)
 
 
 

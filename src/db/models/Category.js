@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 const { Schema, model } = mongoose
 
 const categorySchema = new Schema({
-    name: { type: String, required  }
+    category: { type: String, required: true  }
 })
 
 
-export default mode('Category', categorySchema)
+export default model('Category', categorySchema)

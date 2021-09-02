@@ -1,5 +1,5 @@
 import express from "express"
-import product from "./products-handlers.js"
+import product from "./users-handlers.js"
 
 const router = express.Router()
 
@@ -8,12 +8,9 @@ router
   .get(product.getAll)
   .post(product.create)
   
-  // router
-  // .route("/category/:categoryID")
-  // .get(product.getByCategory)
 
 router
-  .route("/:productID")
+  .route("/:userID")
   .get(product.getSingle)
   .put(product.update)
   .delete(product.deleteSingle)

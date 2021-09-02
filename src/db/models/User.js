@@ -11,5 +11,11 @@ const userSchema = new Schema({
     timestamps: true
 })
 
+userSchema.static("destroy", async function (userID) {
+    const DbRes = await this.findByIdAndDelete(userID)
+  
+    return { DbRes }
+  })
 
-export default mode('User', userSchema)
+
+export default model('User', userSchema)

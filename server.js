@@ -4,6 +4,7 @@ import lib from "./src/lib/index.js"
 import mongoose from 'mongoose'
 import categoryRouter from './src/services/category/index.js'
 import productRouter from './src/services/products/index.js'
+import userRouter from './src/services/users/index.js'
 
 
 const { errorHandlers, serverConfig } = lib
@@ -17,6 +18,7 @@ server.use(cors(serverConfig))
 
 server.use("/category", categoryRouter)
 server.use("/product", productRouter)
+server.use("/user", userRouter)
 
 
 

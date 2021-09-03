@@ -1,4 +1,5 @@
 import Cart from "../../db/models/Cart.js"
+import  mongoose  from "mongoose"
 
 
 
@@ -24,16 +25,40 @@ const getSingle = async (req, res, next) => {
 
 const addProdToCart = async (req, res, next) => {
   try {
-    // check if user already has an active Cart
-    // if yes
-     
-    // if not
-    const newCart = new Cart(req.body)
-    const DbRes = await newCart.save({ new: true })
+    const {userId, products} = req.body
+    
+    const IdToObj = mongoose.Types.ObjectId(products)
 
+    const checkIfIsInCart = await Cart.find({userId : userId, status: "active",  "products.productId": IdToObj})
 
+    if(checkIfIsInCart.length > 0 ){
+      const sumProd = await Cart.findOneAndUpdate(
+        {userId : userId, status: "active",  "products.productId": IdToObj},
+        {
+          $inc: {
+            "products.$.qty": 1,
+          },
+        }, {
+          new: true,
+        }
+      )
+      res.status(200).send(sumProd)
+    } else {
+      const newProdToCart = await Cart.findOneAndUpdate(
+        {userId : userId, status: "active"},
+        {
+          $push: {products: {
+            productId: products,
+            qty: 1
+          } }
+        }, {
+          new: true,
+          upsert: true
+        })
 
-    res.status(200).send(DbRes)
+      res.status(200).send(newProdToCart)
+    }
+
   } catch (error) {
     next(error)
   }
